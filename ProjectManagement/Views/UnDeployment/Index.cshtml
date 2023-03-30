@@ -1,0 +1,158 @@
+﻿@model IEnumerable<ProjectManagement.Models.UnDeploymentViewModel>
+@inject IUtility _Utility
+
+@{
+    ViewData["Title"] = "UnDeployment ";
+    
+
+}
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title" style="margin-top:-35px">
+                        <h1>@ViewData["Title"]</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @*<div class="card-box mb-30">
+            <div class="pd-20">
+                <p class="mb-0"><a class="btn btn-primary pull-RIGHT btn-add" style="margin-top:-24px" asp-action="AddOrEdit"><i class="fa fa-plus"></i> &nbsp; CREATE</a></p>
+            </div>
+        </div>*@
+        <br />
+        <partial name="_Search" model="new ProjectManagement.Models.UnDeploymentViewModel()" />
+
+        @*<div class="pb-20" id="search">
+            <table class="data-table table stripe hover nowrap " id="dataTable">
+                <thead>
+                    <tr>
+                        <th>S.N.</th>
+                        
+                        <th>
+                            @Html.DisplayNameFor(model => model.PalikaName)
+                        </th>
+
+                       
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                           
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PalikaName)
+                            </td>
+
+                           
+
+                          
+
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>*@
+    </div>
+
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+        function callSearch() {
+            debugger;
+        var StateId = $("#StateId").val()??0;
+        var DistrictId = $("#DistrictId").val()??0;
+        var ProjectId = $("#ProjectId").val()??0;
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            url: '@Url.Action("Search", "UnDeployment")',
+            data: { StateId: StateId, DistrictId: DistrictId, ProjectId: ProjectId },
+            success: function (result) {
+                if (result) {
+                    $('#search').html(result);
+                }
+            },
+            error: function () {
+                alert('error in calling ajax !!')
+            }
+        });
+    }
+
+    </script>
+
+    <script>
+        $ = jQuery.noConflict();
+        $('#StateId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetDistrictByStateId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $('#DistrictId').empty().append("<option value=''>-जिल्ला छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#DistrictId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+
+        $('#DistrictId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetPalikaByDistId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#PalikaId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

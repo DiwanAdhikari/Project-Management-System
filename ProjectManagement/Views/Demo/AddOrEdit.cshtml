@@ -1,0 +1,42 @@
+﻿
+@model ProjectManagement.Models.DemoViewModel
+
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+}
+
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12 col-12">
+                    <div class="title">
+                        <h4>Add Demo Link </h4>
+                        <div>
+                            <form method="post" asp-action="AddOrEdit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input asp-for="Id" type="hidden" />
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="SoftwareName" class="conrol-label"></label>
+                                    <input asp-for="SoftwareName" class="form-control" />
+                                    <span asp-validation-for="SoftwareName" class="text-danger"></span>
+                                </div>
+                                <div class="row col-md-12">
+                                    <input type="submit"  style=" margin-top: 22px;" value="Save" class="btn btn-primary pull-left mb-30" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

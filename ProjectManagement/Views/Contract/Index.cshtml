@@ -1,0 +1,173 @@
+﻿@model ProjectManagement.Models.ContractViewModel
+
+@{
+    ViewData["Title"] = "Contract Details";
+    int i = 1;
+}
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title">
+                        <h1>Contract</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box mb-30">
+            <div class="pd-20">
+                <p class="mb-0"><a class="btn btn-primary pull-left btn-add" style="margin-top:-20px" asp-action="AddOrEdit"><i class="fa fa-plus"></i> &nbsp; CREATE</a></p>
+            </div>
+
+            <div class="pb-20" id="search">
+                <table class="data-table table stripe hover nowrap" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ClientName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SoftwareName)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.BsStartDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.List)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClientName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoftwareName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BsStartDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    <span class="pull-left">
+                                        <a class="btn btn-success" data-toggle="modal" href="#myModal">
+                                            Mail
+                                        </a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a asp-controller="Contract" asp-action="AddOrEdit" asp-route-id="@item.Id">AddOrEdit ||</a>
+                                    <a asp-controller="Contract" asp-action="Details" asp-route-id="@item.Id">Details ||</a>
+                                    <a asp-controller="Contract" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                                </td>
+
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
+
+
+
+<!-- Modal -->
+<!--<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sent Login Information</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-area="Contract" asp-action="SentMail" method="post">
+                <div class="modal-body">-->
+@*<p>Enter your e-mail address below to reset your password.</p>*@
+@*<input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">*@
+<!--<label asp-for="ToEmail"></label>
+                    <input asp-for="ToEmail" placeholder="Email" autocomplete="off" class="form-control  placeholder-no-fix" />
+                    <label asp-for="Subject"></label>
+                    <input asp-for="Subject" placeholder="Email" autocomplete="off" class="form-control  placeholder-no-fix" />
+                    <label asp-for="Body"></label>
+                    <textarea asp-for="Body" placeholder="Email" autocomplete="off" class="form-control  placeholder-no-fix" />
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+<!-- modal -->
+<!-- Trigger the modal with a button -->
+
+<div class="panel-body">
+
+    <!-- Modal -->
+    <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login Information</h4>
+                </div>
+                <form asp-controller="Contract" asp-action="SentMail" asp-area="" method="post">
+                    <div class="modal-body">
+
+
+                        <input type="text" name="Email" placeholder="Email" autocomplete="off" class="form-control">
+                        <br />
+                        <input type="text" name="Subject" placeholder="Subject" autocomplete="off" class="form-control ">
+                        <br />
+                        <textarea type="text" name="Body" placeholder="Body" autocomplete="off" class="form-control"></textarea>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->

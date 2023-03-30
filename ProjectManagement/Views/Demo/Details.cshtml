@@ -1,0 +1,41 @@
+﻿
+
+@model ProjectManagement.Models.DemoViewModel
+
+@{
+    ViewData["Title"] = "Demo Link Details";
+}
+
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+
+        <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+            <div class="form-container">
+                <h1>Demo Link Details</h1>
+                <br />
+                <div class="row">
+                    <div class="col-md-3" style="text-align: right;">@Html.DisplayNameFor(m => m.SoftwareName) :</div>
+                    <div class="col-md-3" style="text-align: left;">@Model.SoftwareName</div>                    
+                    <div class="col-md-3" style="text-align: right;">@Html.DisplayNameFor(m => m.Email) :</div>
+                    <div class="col-md-3" style="text-align: left;">@Model.Email</div>
+                    <div class="col-md-3" style="text-align: right;">@Html.DisplayNameFor(m => m.WebSite) :</div>
+                    <div class="col-md-3" style="text-align: left;">@Model.WebSite</div>
+                    <div class="col-md-3" style="text-align: right;">@Html.DisplayNameFor(m => m.Description) :</div>
+                    <div class="col-md-3" style="text-align: left;">@Model.Description</div>
+                   
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <a class="btn btn-primary pull-left mb-30 mr-1" asp-action="Index">Back List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

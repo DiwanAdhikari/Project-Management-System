@@ -1,0 +1,175 @@
+﻿
+@model ProjectManagement.Models.SupportViewModel
+@inject IUtility _Utility
+
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12 col-12">
+                    <div class="title">
+                        <h4>Add Issues</h4>
+
+                        <div>
+                            <form method="post" asp-action="AddOrEdit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                @*<div class="col-xl-3 col-md-4 col-12">*@
+                                <input asp-for="Id" type="hidden" />
+
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ProjectId"></label>
+                                    <select asp-for="ProjectId" class="form-control" asp-items="await _Utility.GetProjectSelectListItems()">
+                                        <option value="">--select--</option>
+                                    </select>
+                                    <span asp-validation-for="ProjectId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ProblemStatus"></label>
+                                    <select asp-for="ProblemStatus" class="form-control">
+                                        <option value="">--Please Select--</option>
+                                        <option value="Solved">Solved</option>
+                                        <option value="Not Solved">Not Solved</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Running">Running</option>
+
+                                    </select>
+                                    <span asp-validation-for="ProblemStatus" class="text-danger"></span>
+                                </div>
+
+
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Error" class="conrol-label"></label>
+                                    <textarea asp-for="Error" class="form-control"></textarea>
+                                    <span asp-validation-for="Error" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Email" class="conrol-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="OrganizationName" class="conrol-label"></label>
+                                    <input asp-for="OrganizationName" class="form-control" />
+                                    <span asp-validation-for="OrganizationName" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="SupportedById"></label>
+                                    <select asp-for="SupportedById" class="form-control" asp-items="await _Utility.GetEmployeeList()">
+                                        <option>--select--</option>
+                                    </select>
+                                    <span asp-validation-for="SupportedById" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ContactedPerson" class="conrol-label"></label>
+                                    <input asp-for="ContactedPerson" class="form-control" />
+                                    <span asp-validation-for="ContactedPerson" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ContactNumber" class="conrol-label"></label>
+                                    <input asp-for="ContactNumber" class="form-control" />
+                                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Email" class="conrol-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="BsStartDate" class="control-label"></label>
+                                    <input asp-for="BsStartDate" class="form-control" />
+                                    <input type="hidden" asp-for="AdStartDate" class="form-control" />
+                                    <span asp-validation-for="BsStartDate" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-20">
+                                    <label asp-for="Details" class="conrol-label"></label>
+                                    <textarea asp-for="Details" class="form-control"></textarea>
+                                    <span asp-validation-for="Details" class="text-danger"></span>
+                                </div>
+
+
+
+                                <div class="row col-md-12">
+                                    <input type="submit" value="Save" class="btn btn-primary pull-right mb-30" />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/nepali.datepicker.v3.7/js/nepali.datepicker.v3.7.min.js"></script>
+
+
+
+@section Scripts {
+
+    <script>
+       
+
+
+
+        var dobNp = document.getElementById("BsStartDate");
+        dobNp.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            onChange: function () {
+                $('#AdStartDate').val(GetAdDateFromNepaliDate($('#BsStartDate').val()));
+            }
+        });
+
+        var dobNp1 = document.getElementById("BsEndDate");
+        dobNp1.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            onChange: function () {
+                $('#AdEndDate').val(GetAdDateFromNepaliDate($('#BsEndDate').val()));
+            }
+        });
+
+        function GetNepaliCurrentDate() {
+            var selectedDate = NepaliFunctions.GetCurrentBsDate();
+            var month = (selectedDate.month.toString().length == 2) ? selectedDate.month : '0' + selectedDate.month;
+            var day = (selectedDate.day.toString().length == 2) ? selectedDate.day : '0' + selectedDate.day;
+            var date = selectedDate.year + '-' + month + '-' + day;
+            return date;
+        }
+
+        function GetAdDateFromNepaliDate(nepaliDate) {
+            if (nepaliDate.trim()) {
+                var aa = nepaliDate.split('-');
+                var selectedDate = NepaliFunctions.BS2AD({ year: aa[0], month: aa[1], day: aa[2] });
+                var adDate = new Date(`${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`);
+                return adDate.toLocaleDateString('en-CA');
+            }
+        }
+    </script>
+
+}
+
+
+

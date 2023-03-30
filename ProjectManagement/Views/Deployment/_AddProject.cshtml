@@ -1,0 +1,26 @@
+﻿@model ProjectManagement.Models.AddProjectViewModel
+@inject IUtility _Utility
+
+<tr class="newtrans">
+    @using (Html.BeginCollectionItem("ProjectList"))
+    {
+        <td>
+            <div class="col-xl-12 col-md-12 col-12">
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="DeploymentId" type="hidden" />
+
+                <label asp-for="ProjectId"></label>
+                <select asp-for="ProjectId" class="form-control" asp-items="await _Utility.GetProjectSelectListItems()">
+                    <option value="">--select--</option>
+                </select>
+                <span asp-validation-for="ProjectId" class="text-danger"></span>
+            </div>
+        </td>
+        <td>
+            @if (Model.Id == 0)
+            {
+                <button type="button" class="btn btn-danger btn-delete" onclick="DeleteRow(this)"><i class="fa fa-trash">-</i></button>
+            }
+        </td>
+    }
+</tr>

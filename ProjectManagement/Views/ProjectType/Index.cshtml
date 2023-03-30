@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ProjectManagement.Models.ProjectTypeViewModel>
+
+@{
+    ViewData["Title"] = "PROJECT TYPE";
+    int i = 1;
+}
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title">
+                        <h4>@ViewData["Title"]</h4>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box mb-30">
+            <div class="pd-20">
+                <p class="mb-0"><a class="btn btn-primary pull-left btn-add" asp-action="AddOrEdit"><i class="fa fa-plus"></i> &nbsp; CREATE</a></p>
+            </div>
+
+            <div class="pb-20">
+                <table class="data-table table stripe hover nowrap">
+                    <thead>
+                        <tr>
+                            
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProjectTypeId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProjectTypeName)
+                            </th>
+                            
+
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjectTypeId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjectTypeName)
+                                </td>
+                                
+
+                                <td>
+                                    <a asp-controller="ProjectType" asp-action="AddOrEdit" asp-route-id="@item.ProjectTypeId">AddOrEdit ||</a>                                   
+                                    <a asp-controller="ProjectType" asp-action="Delete" asp-route-id="@item.ProjectTypeId">Delete</a>
+
+                                </td>
+
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

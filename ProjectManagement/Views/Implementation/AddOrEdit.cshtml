@@ -1,0 +1,178 @@
+﻿@model ProjectManagement.Models.ImplementationViewModel
+@inject IUtility _Utility
+
+
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12 col-12">
+                    <div class="title">
+                        <h4>Add Projects Details</h4>
+
+                        <div>
+                            <form method="post" asp-action="AddOrEdit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                @*<div class="col-xl-3 col-md-4 col-12">*@
+                                <input asp-for="Id" type="hidden" />
+
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ProjectId"></label>
+                                    <select asp-for="ProjectId" class="form-control" asp-items="await _Utility.GetProjectSelectListItems()">
+                                        <option value="">--select--</option>
+                                    </select>
+                                    <span asp-validation-for="ProjectId" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="FiscalYearId"></label>
+                                    <select asp-for="FiscalYearId" class="form-control" asp-items="await _Utility.GetCurrentFiscalYear()">
+                                        <option value="">--select--</option>
+                                    </select>
+                                    <span asp-validation-for="FiscalYearId" class="text-danger"></span>
+                                </div>
+                                @*<div class="col-xl-3 col-md-4 col-12">
+            <label asp-for="FiscalYear" class="conrol-label"></label>
+            <input asp-for="FiscalYear" class="form-control" />
+            <span asp-validation-for="FiscalYear" class="text-danger"></span>
+        </div>*@
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="StateId" class="control-label"></label>
+                                    <select asp-for="StateId" asp-items="await _Utility.GetSelectListState()" class="form-control">
+                                        <option value="">--Please select--</option>
+                                    </select>
+                                    <span asp-validation-for="StateId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="DistrictId" class="control-label"></label>
+                                    <select asp-for="DistrictId" asp-items="await _Utility.GetDistrictSelectListItems()" class="form-control">
+                                        <option value="">--Please select--</option>
+                                    </select>
+                                    <span asp-validation-for="DistrictId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="PalikaId" class="control-label"></label>
+                                    <select asp-for="PalikaId" asp-items="await _Utility.GetPalikaSelectListItems()" class="form-control">
+                                        <option value="">--Please select--</option>
+                                    </select>
+                                    <span asp-validation-for="PalikaId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Ward" class="conrol-label"></label>
+                                    <input asp-for="Ward" class="form-control" />
+                                    <span asp-validation-for="Ward" class="text-danger"></span>
+                                </div>
+                                @*<div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Status" class="conrol-label"></label>
+                                    <input asp-for="Status" class="form-control" />
+                                    <span asp-validation-for="Status" class="text-danger"></span>
+                                </div>*@
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ProjectAmount" class="conrol-label"></label>
+                                    <input asp-for="ProjectAmount" class="form-control" />
+                                    <span asp-validation-for="ProjectAmount" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ProjectFinalizedBy"></label>
+                                    <select asp-for="ProjectFinalizedBy" class="form-control" asp-items="await _Utility.GetEmployeeList()">
+                                        <option>--select--</option>
+                                    </select>
+                                    <span asp-validation-for="ProjectFinalizedBy" class="text-danger"></span>
+                                </div>
+                                
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ContactPerson" class="conrol-label"></label>
+                                    <input asp-for="ContactPerson" class="form-control" />
+                                    <span asp-validation-for="ContactPerson" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Email" class="conrol-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="PhoneNumber" class="conrol-label"></label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Description" class="conrol-label"></label>
+                                    <textarea asp-for="Description" class="form-control"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Feedback" class="conrol-label"></label>
+                                    <textarea asp-for="Feedback" class="form-control"></textarea>
+                                    <span asp-validation-for="Feedback" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="row col-md-12">
+                                    <input type="submit" value="Save" class="btn btn-primary pull-right mb-30" />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+
+
+@section Scripts {
+    
+    <script>
+        $('#StateId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetDistrictByStateId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $('#DistrictId').empty().append("<option value=''>-जिल्ला छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#DistrictId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+
+        $('#DistrictId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetPalikaByDistId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#PalikaId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+    </script>
+}

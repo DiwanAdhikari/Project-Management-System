@@ -1,0 +1,89 @@
+﻿
+@model ProjectManagement.Models.DemoLinkViewModel
+
+
+@{
+    ViewData["Title"] = "CreateDemoLink";
+}
+
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12 col-12">
+                    <div class="title">
+                        <h4><b>Add Demo Link Details</b></h4>
+
+                        <div>
+                            <form method="post" asp-action="CreateDemoLink">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input asp-for="Id" type="hidden" />
+                                <input asp-for="DemoId" type="hidden" />
+                                @*<input asp-for="DemoId" type="hidden" />*@
+
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="SoftwareName" class="conrol-label"></label>
+                                    <input asp-for="SoftwareName" class="form-control" />
+                                    <span asp-validation-for="SoftwareName" class="text-danger"></span>
+                                </div>
+
+                                @*<div class="col-xl-3 col-md-4 col-12">
+                                        <label asp-for="ContractPerson" class="conrol-label"></label>
+                                        <input asp-for="ContractPerson" class="form-control" />
+                                        <span asp-validation-for="ContractPerson" class="text-danger"></span>
+                                    </div>*@
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Email" class="conrol-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                @*<div class="col-xl-3 col-md-4 col-12">
+                                            <label asp-for="PhoneNumber" class="conrol-label"></label>
+                                            <input asp-for="PhoneNumber" class="form-control" />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-xl-3 col-md-4 col-12">
+                                            <label asp-for="Address" class="conrol-label"></label>
+                                            <input asp-for="Address" class="form-control">
+                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>*@
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="WebSite" class="conrol-label"></label>
+                                    <textarea asp-for="WebSite" class="form-control" placeholder="www.example.com"></textarea>
+                                    <span asp-validation-for="WebSite" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Description" class="conrol-label"></label>
+                                    <textarea asp-for="Description" class="form-control"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+
+                                <div class="row col-md-12">
+                                    <input type="submit" value="Save" class="btn btn-primary pull-right mb-30" />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+﻿@model ProjectManagement.Models.RequirementViewModel
+@inject IUtility _Utility
+
+<tr class="newtrans">
+    @using (Html.BeginCollectionItem("RequirementList"))
+    {
+        <td>
+            <input asp-for="Id" type="hidden" />
+            <input asp-for="Requirements" class="form-control " />
+            <span asp-validation-for="Requirements" class="text-danger"></span>
+
+        </td>
+        <td>
+          
+            <select asp-for="Result" class="form-control">
+                <option value="">--Please Select--</option>
+                <option value="Running">Running</option>
+                <option value="Halted">Halted</option>
+                <option value="Completed">Completed</option>
+
+            </select>
+            <span asp-validation-for="Result" class="text-danger"></span>
+           
+        </td>
+       
+
+        <td>
+            @if (Model.Id == 0)
+            {
+                <button type="button" class="btn btn-danger btn-delete" onclick="DeleteRow(this)"><i class="fa fa-trash">-</i></button>
+            }
+        </td>
+    }
+</tr>
+
+
+<script type="text/javascript">
+    function DisableDrCr(e) {
+        var row = $(e).closest('.newtrans');
+        var value = $(row).find('.acctype').val();
+        if (value == 1) {
+            //dr
+            $(row).find('.cramt').prop('disabled', true).val(0);
+        } else if (value == 2) {
+            //cr
+            $(row).find('.dramt').prop('disabled', true).val(0);
+        }
+
+        TotalDrCr();
+    }
+
+    function DeleteRow(e) {
+        var row = $(e).closest('.newtrans');
+        var confirmValue = confirm("Are you sure to delete ?");
+        if (confirmValue) {
+            $(row).remove();
+            TotalDrCr();
+        }
+    }
+</script>

@@ -1,0 +1,129 @@
+﻿@model FiscalYearViewModel
+@inject IUtility _Utility
+@{
+    ViewData["Title"] = "CreateFiscal";
+}
+
+
+
+
+<link href="~/nepali.datepicker.v3.7/css/nepali.datepicker.v3.7.min.css" rel="stylesheet" />
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreateFiscal">
+                <input asp-for="Id" class="form-control" type="hidden" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="SAVE" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+
+<h4>Add Fiscal Year</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateFiscal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocalName" class="control-label"></label>
+                <input asp-for="LocalName" class="form-control" />
+                <span asp-validation-for="LocalName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BsStartDate" class="control-label"></label>
+                <input asp-for="BsStartDate" class="form-control" />
+                <input type="hidden" asp-for="AdStartDate" class="form-control" />
+                <span asp-validation-for="BsStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BsEndDate" class="control-label"></label>
+                <input asp-for="BsEndDate" class="form-control" />
+                <input type="hidden" asp-for="AdEndDate" class="form-control" />
+                <span asp-validation-for="BsEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label"></label>
+                <input type="checkbox" asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary pull-left mb-30" />
+
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+
+</div>
+
+<script src="~/nepali.datepicker.v3.7/js/nepali.datepicker.v3.7.min.js"></script>
+@*@section Scripts {
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}*@
+    <script>
+
+
+        var dobNp = document.getElementById("BsStartDate");
+        dobNp.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            onChange: function () {
+                $('#AdStartDate').val(GetAdDateFromNepaliDate($('#BsStartDate').val()));
+            }
+        });
+
+        var dobNp1 = document.getElementById("BsEndDate");
+        dobNp1.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            onChange: function () {
+                $('#AdEndDate').val(GetAdDateFromNepaliDate($('#BsEndDate').val()));
+            }
+        });
+
+        function GetNepaliCurrentDate() {
+            var selectedDate = NepaliFunctions.GetCurrentBsDate();
+            var month = (selectedDate.month.toString().length == 2) ? selectedDate.month : '0' + selectedDate.month;
+            var day = (selectedDate.day.toString().length == 2) ? selectedDate.day : '0' + selectedDate.day;
+            var date = selectedDate.year + '-' + month + '-' + day;
+            return date;
+        }
+
+        function GetAdDateFromNepaliDate(nepaliDate) {
+            if (nepaliDate.trim()) {
+                var aa = nepaliDate.split('-');
+                var selectedDate = NepaliFunctions.BS2AD({ year: aa[0], month: aa[1], day: aa[2] });
+                var adDate = new Date(`${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`);
+                return adDate.toLocaleDateString('en-CA');
+            }
+        }
+    </script>
+@*}*@

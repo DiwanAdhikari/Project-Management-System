@@ -1,0 +1,401 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from thevectorlab.net/flatlab/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Jan 2019 05:29:03 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.html">
+
+    <title>PROJECT MANAGEMENT</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/flatlab/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/flatlab/css/bootstrap-reset.css" rel="stylesheet" />
+    <!--external css-->
+
+    <link href="~/flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/flatlab/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" />
+    <link href="~/flatlab/css/owl.carousel.css" rel="stylesheet" />
+    <!--right slidebar-->
+
+    <link href="~/flatlab/css/slidebars.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+
+    <link href="~/datatables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/datatables/css/jquery.dataTables.css" rel="stylesheet" />
+
+
+    <link href="~/flatlab/css/style.css" rel="stylesheet" />
+    <link href="~/flatlab/css/style-responsive.css" rel="stylesheet" />
+    <link href="~/nepali.datepicker.v3.7/css/nepali.datepicker.v3.7.min.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <section id="container">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <i class="fa fa-bars"></i>
+            </div>
+            <!--logo start-->
+            <a asp-controller="Home" asp-action="Dashboard" class="logo">PROJECT <span> MANAGEMENT</span></a>
+            <!--logo end-->
+            <div class="top-nav ">
+                <partial name="_LoginPartial" />
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse " style="z-index:1;">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li>
+                        <a asp-controller="Home" asp-action="Dashboard">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Operator"))
+                    {
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-cogs fa-spin fa-3x fa-fw"></i>
+                                <span>Setup</span>
+                            </a>
+                            <ul class="sub">
+                                <li>
+                                    <a asp-area="" asp-controller="FiscalYear" asp-action="FiscalList">
+                                        <i class="fa fa-calendar"></i>
+                                        <span>Fiscal Year</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Employee" asp-action="Index">
+                                        <i class="fa fa-male"></i>
+                                        <span>Employee</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="ProjectType" asp-action="Index">
+                                        <i class="fa fa-puzzle-piece"></i>
+                                        <span>Project Type</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Project" asp-action="Index">
+                                        <i class="fa fa-file-o"></i>
+                                        <span>Projects</span>
+                                    </a>
+                                </li>
+                                @*<li>
+                        <a asp-area="" asp-controller="Server" asp-action="Index">
+                            <i class="fa fa-file-o"></i>
+                            <span>Server</span>
+                        </a>
+                    </li>*@
+
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a asp-area="" asp-controller="Implementation" asp-action="Index">
+                                <i class="fa fa-cog fa-spin"></i>
+                                <span>Implemented Project</span>
+                            </a>
+                        </li>
+                    }
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-laptop"></i>
+                            <span>Project Tracking</span>
+                        </a>
+                        <ul class="sub">
+                            @if (User.IsInRole("Admin") || User.IsInRole("Operator") || User.IsInRole("Users"))
+                            {
+                                <li>
+                                    <a asp-area="" asp-controller="Issue" asp-action="Index">
+                                        <i class="fa fa-exclamation"></i>
+                                        <span>Issues</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Operator"))
+                            {
+                                <li>
+                                    <a asp-area="" asp-controller="Support" asp-action="Index">
+                                        <i class="fa fa-phone"></i>
+                                        <span>Support</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Contract" asp-action="Index">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                        <span>Contract</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Operator"))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Ministry" asp-action="Index">
+                                <i class="fa fa-home"></i>
+                                <span>मन्त्रालय</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Links" asp-action="Index">
+                                <i class="fa fa-link"></i>
+                                <span>High Priority Links</span>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a asp-area="" asp-controller="Demo" asp-action="Index">
+                                <i class="fa fa-link"></i>
+                                <span>Demo</span>
+                            </a>
+                        </li>
+                        <partial name="_DemoLink" />
+
+                        <li>
+                            <a asp-area="" asp-controller="ProjectRequirement" asp-action="Index">
+                                <i class="fa fa-link"></i>
+                                <span>Project Requirement</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Deployment" asp-action="Index">
+                                <i class="fa fa-link"></i>
+                                <span>Project Deployment</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="UnDeployment" asp-action="Index">
+                                <i class="fa fa-link"></i>
+                                <span> UnDeployment Project</span>
+                            </a>
+                        </li>
+                    }
+                    @*<li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-laptop"></i>
+                <span>Demo Links</span>
+            </a>
+            <ul class="sub">
+
+                <li>
+                    <a asp-area="" asp-controller="Insurance" asp-action="Index">
+                        <i class="fa fa-exclamation"></i>
+                        <span>INSURANCE</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a asp-area="" asp-controller="Banking" asp-action="Index">
+                        <i class="fa fa-phone"></i>
+                        <span>BANKING</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Sifarish" asp-action="Index">
+                        <i class="fa fa-pencil-square-o"></i>
+                        <span>SIFARISH</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="ERP" asp-action="Index">
+                        <i class="fa fa-pencil-square-o"></i>
+                        <span>ERP</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>*@
+
+
+
+                    @*<li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-book"></i>
+                <span>UI Elements</span>
+            </a>
+            <ul class="sub">
+                <li><a href="general.html">General</a></li>
+                <li><a href="buttons.html">Buttons</a></li>
+                <li><a href="modal.html">Modal</a></li>
+                <li><a href="toastr.html">Toastr Notifications</a></li>
+                <li><a href="widget.html">Widget</a></li>
+                <li><a href="slider.html">Slider</a></li>
+                <li><a href="nestable.html">Nestable</a></li>
+                <li><a href="font_awesome.html">Font Awesome</a></li>
+            </ul>
+        </li>
+
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-cogs"></i>
+                <span>Components</span>
+            </a>
+            <ul class="sub">
+                <li><a href="grids.html">Grids</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="todo_list.html">Todo List</a></li>
+                <li><a href="draggable_portlet.html">Draggable Portlet</a></li>
+                <li><a href="tree.html">Tree View</a></li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-tasks"></i>
+                <span>Form Stuff</span>
+            </a>
+            <ul class="sub">
+                <li><a href="form_component.html">Form Components</a></li>
+                <li><a href="advanced_form_components.html">Advanced Components</a></li>
+                <li><a href="form_wizard.html">Form Wizard</a></li>
+                <li><a href="form_validation.html">Form Validation</a></li>
+                <li><a href="dropzone.html">Dropzone File Upload</a></li>
+                <li><a href="inline_editor.html">Inline Editor</a></li>
+                <li><a href="image_cropping.html">Image Cropping</a></li>
+                <li><a href="file_upload.html">Multiple File Upload</a></li>
+            </ul>
+        </li>
+
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-glass"></i>
+                <span>Extra</span>
+            </a>
+            <ul class="sub">
+                <li><a href="blank.html">Blank Page</a></li>
+                <li><a href="sidebar_closed.html">Sidebar Closed</a></li>
+                <li><a href="people_directory.html">People Directory</a></li>
+                <li><a href="coming_soon.html">Coming Soon</a></li>
+                <li><a href="lock_screen.html">Lock Screen</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="invoice.html">Invoice</a></li>
+                <li><a href="project_list.html">Project List</a></li>
+                <li><a href="project_details.html">Project Details</a></li>
+                <li><a href="search_result.html">Search Result</a></li>
+                <li><a href="pricing_table.html">Pricing Table</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="fb_wall.html">FB Wall</a></li>
+                <li><a href="404.html">404 Error</a></li>
+                <li><a href="500.html">500 Error</a></li>
+            </ul>
+        </li>*@
+
+
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+
+                @RenderBody()
+
+            </section>
+        </section>
+
+        <!-- Right Slidebar end -->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2022 &copy; Softech Foundation.
+                <a href="#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    @RenderSection("scripts", required: false)
+
+    <script src="~/flatlab/js/jquery.js"></script>
+    <script src="~/flatlab/js/bootstrap.min.js"></script>
+    <script src="~/flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="~/flatlab/js/jquery.nicescroll.js"></script>
+    <script src="~/flatlab/js/jquery.sparkline.js"></script>
+    <script src="~/flatlab/js/easy-pie-chart.js"></script>
+    <script src="~/flatlab/js/owl.carousel.js"></script>
+    <script src="~/flatlab/js/jquery.customSelect.min.js"></script>
+    <script src="~/flatlab/js/respond.min.js"></script>
+    <script src="~/nepali.datepicker.v3.7/js/nepali.datepicker.v3.7.min.js"></script>
+
+    <!--right slidebar-->
+
+
+    <script src="~/flatlab/js/slidebars.min.js"></script>
+
+    <!--common script for all pages-->
+
+
+    <script src="~/flatlab/js/common-scripts.js"></script>
+
+
+    <!--script for this page-->
+    <script src="~/datatables/js/dataTables.bootstrap.js"></script>
+    <script src="~/datatables/js/jquery.dataTables.js"></script>
+
+    <script src="~/flatlab/js/sparkline-chart.js"></script>
+    <script src="~/flatlab/js/easy-pie-chart.js"></script>
+    <script src="~/flatlab/js/count.js"></script>
+
+    <script>
+
+        //owl carousel
+
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true,
+                autoPlay: true
+
+            });
+        });
+
+        //custom select box
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+
+        $(window).on("resize", function () {
+            var owl = $("#owl-demo").data("owlCarousel");
+            owl.reinit();
+        });
+
+    </script>
+
+</body>
+
+<!-- Mirrored from thevectorlab.net/flatlab/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Jan 2019 05:29:54 GMT -->
+</html>

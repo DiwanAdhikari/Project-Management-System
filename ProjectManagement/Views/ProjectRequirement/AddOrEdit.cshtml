@@ -1,0 +1,230 @@
+﻿@model ProjectManagement.Models.ProjectRequirementViewModel
+@inject IUtility _Utility
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12 col-12">
+                    <div class="title">
+                        <h4><b>Add Project Requirements</b> </h4>
+
+                        <div>
+                            <form method="post" asp-action="AddOrEdit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                @*<div class="col-xl-3 col-md-4 col-12">*@
+                                <input asp-for="Id" type="hidden" />
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ClientName" class="conrol-label"></label>
+                                    <input asp-for="ClientName" class="form-control" />
+                                    <span asp-validation-for="ClientName" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ProjectId"></label>
+                                    <select asp-for="ProjectId" class="form-control" asp-items="await _Utility.GetProjectSelectListItems()">
+                                        <option value="">--Please Select--</option>
+                                    </select>
+                                    <span asp-validation-for="ProjectId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="StateId" class="control-label"></label>
+                                    <select asp-for="StateId" asp-items="await _Utility.GetSelectListState()" class="form-control">
+                                        <option value="">--प्रदेश छान्नुहोस--</option>
+                                    </select>
+                                    <span asp-validation-for="StateId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="DistrictId" class="control-label"></label>
+                                    <select asp-for="DistrictId" asp-items="await _Utility.GetDistrictSelectListItems()" class="form-control">
+                                        <option value="">--जिल्ला छान्नुहोस--</option>
+                                    </select>
+                                    <span asp-validation-for="DistrictId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="PalikaId" class="control-label"></label>
+                                    <select asp-for="PalikaId" asp-items="await _Utility.GetPalikaSelectListItems()" class="form-control">
+                                        <option value="">--पालिका छान्नुहोस--</option>
+                                    </select>
+                                    <span asp-validation-for="PalikaId" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="ProjectAssignedTo"></label>
+                                    <select asp-for="ProjectAssignedTo" class="form-control" asp-items="await _Utility.GetEmployeeList()">
+                                        <option>--Please Select--</option>
+                                    </select>
+                                    <span asp-validation-for="ProjectAssignedTo" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="BsStartDate" class="control-label"></label>
+                                    <input asp-for="BsStartDate" class="form-control" id="BsStartDate" />
+
+                                    <span asp-validation-for="BsStartDate" class="text-danger"></span>
+                                </div>
+                                @*<div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Status"></label>
+                                    <select asp-for="Status" class="form-control">
+                                        <option value="">--Please Select--</option>
+                                        <option value="Running">Running</option>
+                                        <option value="Halted">Halted</option>
+                                        <option value="Completed">Completed</option>
+
+                                    </select>
+                                    <span asp-validation-for="Status" class="text-danger"></span>
+                                </div>*@
+                                <br />
+                                <br />
+                                <button type="button" id="btnAddRequire" style=" margin-top: 62px;" class="btn btn-primary pull-right mb-30"><i class="fa fa-plus"></i> Add</button>
+                                <div id="newRequire" style="margin-top:60px;">
+                                    <table style="margin-top: 180px!important;" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Requirement</th>
+                                                <th>Status</th>
+                                            </tr>
+
+
+
+                                        </thead>
+                                        
+                                        <tbody style="padding-top:1rem;" id="transactionbody">
+                                            @if (Model.RequirementList.Count > 0)
+                                            {
+                                                foreach (var item in Model.RequirementList)
+                                                {
+                                                    <partial name="~/Views/ProjectRequirement/_AddRequirement.cshtml" model="@item" />
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <partial name="~/Views/ProjectRequirement/_AddRequirement.cshtml" model="@new RequirementViewModel()" />
+                                            }
+                                        </tbody>
+                                        <tfoot>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+
+
+                                <div class="row col-md-12">
+                                    <input type="submit" value="Save" class="btn btn-primary pull-right mb-30" />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/nepali.datepicker.v3.7/js/nepali.datepicker.v3.7.min.js"></script>
+
+
+
+@section Scripts {
+
+    <script>
+        $('#StateId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetDistrictByStateId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $('#DistrictId').empty().append("<option value=''>-जिल्ला छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#DistrictId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+
+        $('#DistrictId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetPalikaByDistId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#PalikaId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+        var dobNp = document.getElementById("BsStartDate");
+        dobNp.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            //onChange: function () {
+            //    $('#AdStartDate').val(GetAdDateFromNepaliDate($('#BsStartDate').val()));
+            //}
+        });
+
+        var dobNp1 = document.getElementById("BsEndDate");
+        dobNp1.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            onChange: function () {
+                $('#AdEndDate').val(GetAdDateFromNepaliDate($('#BsEndDate').val()));
+            }
+        });
+
+        function GetNepaliCurrentDate() {
+            var selectedDate = NepaliFunctions.GetCurrentBsDate();
+            var month = (selectedDate.month.toString().length == 2) ? selectedDate.month : '0' + selectedDate.month;
+            var day = (selectedDate.day.toString().length == 2) ? selectedDate.day : '0' + selectedDate.day;
+            var date = selectedDate.year + '-' + month + '-' + day;
+            return date;
+        }
+
+        function GetAdDateFromNepaliDate(nepaliDate) {
+            if (nepaliDate.trim()) {
+                var aa = nepaliDate.split('-');
+                var selectedDate = NepaliFunctions.BS2AD({ year: aa[0], month: aa[1], day: aa[2] });
+                var adDate = new Date(`${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`);
+                return adDate.toLocaleDateString('en-CA');
+            }
+        }
+    </script>
+    <script>
+        $('#btnAddRequire').click(function () {
+        $.ajax({
+            url: '@Url.Action("AddRequirement", "ProjectRequirement", new {area="" })',
+            success: function (result) {
+                if (result) {
+                    $('#transactionbody').append(result);
+                }
+            },
+            error: function () {
+                alert('error in calling ajax !!')
+            }
+        })
+        });
+    </script>
+}

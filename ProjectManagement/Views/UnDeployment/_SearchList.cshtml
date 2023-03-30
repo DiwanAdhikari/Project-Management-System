@@ -1,0 +1,46 @@
+﻿@model ProjectManagement.Models.UnDeploymentViewModel
+@{
+    int i = 1;
+}
+<table class="data-table table stripe hover nowrap" id="dataTable">
+    <thead>
+        <tr>
+            <th>S.N.</th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.PalikaName)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.List)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PalikaName)
+                </td>
+
+
+
+
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+    });
+</script>
+
+
+
+

@@ -1,0 +1,26 @@
+﻿@*@model DemoViewModel*@
+@inject IUtility _Utility
+@{
+    var demo = _Utility.GetDemoList();
+}
+
+
+<li class="sub-menu">
+    <a asp-area="" asp-controller="Demo" asp-action="Index">
+        <i class="fa fa-link"></i>
+        <span>DemoLinks</span>
+    </a>
+    <ul class="sub">
+
+        @foreach (var item in demo.Result)
+        {
+            <li>
+                <a asp-area="" asp-controller="DemoLink" asp-action="DemoListIndex" asp-route-Demoid="@item.Id">
+                    <i class="fa fa-link"></i>
+                    <span>@item.SoftwareName</span>
+                </a>
+            </li>
+        }
+
+    </ul>
+</li>

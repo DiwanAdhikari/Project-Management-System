@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+<!--state overview start-->
+<div class="row state-overview" style="z-index:0;">
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol terques">
+                <i class="fa fa-file"></i>
+            </div>
+            <div class="value">
+                <h1 class="">
+                </h1>
+                <p>Projects</p>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol red">
+                <i class="fa fa-certificate"></i>
+            </div>
+            <div class="value">
+                <h1 class=" ">
+                </h1>
+                <p>Implementated Projects</p>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol yellow">
+                <i class="fa fa-male"></i>
+            </div>
+            <div class="value">
+                <h1 class=" ">
+                </h1>
+                <p>Employees</p>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol blue">
+                <i class="fa fa-home"></i>
+            </div>
+            <div class="value">
+                <h1 class=" ">
+                </h1>
+                <p>मन्त्रालय</p>
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <section class="panel">
+            <div class="symbol blue">
+                <i class="fa fa-briefcase"></i>
+            </div>
+            <div class="value">
+                <h1 class=" ">
+                </h1>
+                <p>Deployment</p>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-9 mb-30">
+        <div class="card-box height-100-p pd-20">
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                @*<p class="highcharts-description">
+                        A variation of a 3D pie chart with an inner radius added.
+                        These charts are often referred to as donut charts.
+                    </p>*@
+            </figure>
+        </div>
+    </div>
+ </div>
+    <!--state overview end-->

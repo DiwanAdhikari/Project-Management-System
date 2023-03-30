@@ -1,0 +1,122 @@
+﻿@model IEnumerable<ProjectManagement.Models.ImplementationViewModel>
+
+@{
+    ViewData["Title"] = "Implemented Projects";
+    int i = 1;
+}
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title">
+                        <h4>@ViewData["Title"]</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box mb-30">
+            <div class="pd-20">
+                <p class="mb-0"><a class="btn btn-primary pull-left btn-add" asp-action="AddOrEdit"><i class="fa fa-plus"></i> &nbsp; CREATE</a></p>
+            </div>
+
+            <div class="pb-20" id="search">
+                <table class="data-table table stripe hover nowrap" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProjectName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProjectAmount)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProjectFinalizedBy)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PalikaName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProjectAmount)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PalikaName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <a asp-controller="Implementation" asp-action="AddOrEdit" asp-route-id="@item.Id">AddOrEdit ||</a>
+                                <a asp-controller="Implementation" asp-action="Details" asp-route-id="@item.Id">Details ||</a>
+                                <a asp-controller="Implementation" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                            </td>
+
+                        </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
