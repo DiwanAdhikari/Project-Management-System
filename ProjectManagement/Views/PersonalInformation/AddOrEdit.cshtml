@@ -1,0 +1,203 @@
+﻿
+@model ProjectManagement.Models.PersonalInformationViewModel
+@inject IUtility _Utility
+
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12 col-12">
+                    <div class="title">
+                        <h4>Add known Clients</h4>
+
+                        <div>
+                            <form method="post" id="Myform" Onsubmit="sendForm(event)" asp-action="AddOrEdit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                @*<div class="col-xl-3 col-md-4 col-12">*@
+                                <input asp-for="Id" type="hidden" />
+                                <div class="col-xl-3 col-md-3 col-12">
+                                    <label asp-for="Name" class="conrol-label"></label>
+                                    <input asp-for="Name" class="form-control"></input>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-12">
+                                    <label asp-for="PhoneNumber" class="conrol-label"></label>
+                                    <input asp-for="PhoneNumber" class="form-control"></input>
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-xl-3 col-md-3 col-12">
+                                    <label asp-for="Email" class="conrol-label"></label>
+                                    <input asp-for="Email" , placeholder="gmail.com" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-12">
+                                    <label asp-for="Address" class="conrol-label"></label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="StateId" class="control-label"></label>
+                                    <select asp-for="StateId" asp-items="await _Utility.GetSelectListState()" class="form-control">
+                                        <option value="">--Please select State--</option>
+                                    </select>
+                                    <span asp-validation-for="StateId" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="DistrictId" class="control-label"></label>
+                                    <select asp-for="DistrictId" asp-items="await _Utility.GetDistrictSelectListItems()" class="form-control">
+                                        <option value="">--Please select District--</option>
+                                    </select>
+                                    <span asp-validation-for="DistrictId" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="PalikaId" class="control-label"></label>
+                                    <select asp-for="PalikaId" asp-items="await _Utility.GetPalikaSelectListItems()" class="form-control">
+                                        <option value="">--Please select Palika--</option>
+                                    </select>
+                                    <span asp-validation-for="PalikaId" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="col-xl-4 col-md-4 col-12">
+                                    <label asp-for="Reference" class="conrol-label"></label>
+                                    <input asp-for="Reference" , placeholder="who do you got refrence from?" class="form-control"></input>
+                                    <span asp-validation-for="Reference" class="text-danger"></span>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-12">
+                                    <label asp-for="Remarks" class="conrol-label"></label>
+                                    <textarea asp-for="Remarks" , placeholder="Add your Remarks" class="form-control"></textarea>
+                                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                                </div>
+
+                                @*<div class="col-xl-3 col-md-4 col-12">
+                                        <label asp-for="Photo" class="control-label"></label>
+                                        <input type="file" name="file" />
+                                    </div>*@
+                                <div class="row col-md-12">
+                                    <input type="submit" style=" margin-top: 22px; value="Save" class="btn btn-primary pull-right mb-30" />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/nepali.datepicker.v3.7/js/nepali.datepicker.v3.7.min.js"></script>
+
+
+
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $('#StateId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetDistrictByStateId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $('#DistrictId').empty().append("<option value=''>-जिल्ला छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#DistrictId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+
+        $('#DistrictId').change(function () {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("GetPalikaByDistId", "Ajax", new { area = "" })',
+                type: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#PalikaId').empty().append("<option value=''>-न.पा/ग.पा छान्नुहोस्-</option>");
+                    $.each(data, function (index, item) {
+                        $('#PalikaId').append(`<option value="${item.value}">${item.text}</option>`);
+                    });
+                },
+                error: function () {
+                    alert('error in calling ajax !!');
+                }
+            });
+        });
+
+
+
+        var dobNp = document.getElementById("BsStartDate");
+        dobNp.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            onChange: function () {
+                $('#AdStartDate').val(GetAdDateFromNepaliDate($('#BsStartDate').val()));
+            }
+        });
+
+        var dobNp1 = document.getElementById("BsEndDate");
+        dobNp1.nepaliDatePicker({
+            ndpYear: true,
+            ndpMonth: true,
+            readOnlyInput: true,
+            //disableAfter: GetNepaliCurrentDate(),
+            onChange: function () {
+                $('#AdEndDate').val(GetAdDateFromNepaliDate($('#BsEndDate').val()));
+            }
+        });
+
+        function GetNepaliCurrentDate() {
+            var selectedDate = NepaliFunctions.GetCurrentBsDate();
+            var month = (selectedDate.month.toString().length == 2) ? selectedDate.month : '0' + selectedDate.month;
+            var day = (selectedDate.day.toString().length == 2) ? selectedDate.day : '0' + selectedDate.day;
+            var date = selectedDate.year + '-' + month + '-' + day;
+            return date;
+        }
+
+        function GetAdDateFromNepaliDate(nepaliDate) {
+            if (nepaliDate.trim()) {
+                var aa = nepaliDate.split('-');
+                var selectedDate = NepaliFunctions.BS2AD({ year: aa[0], month: aa[1], day: aa[2] });
+                var adDate = new Date(`${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`);
+                return adDate.toLocaleDateString('en-CA');
+            }
+        }
+        function sendForm(e) {
+            e.preventDefault();
+            Swal.fire(
+                'Good job!',
+                'Data saved Sucessfully',
+                'success',
+               'timer: 3000',
+            );
+
+            const Myform = document.getElementById('Myform'); 
+            Myform.submit();
+        }
+
+    </script>
+
+}
+

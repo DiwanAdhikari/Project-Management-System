@@ -59,6 +59,7 @@ namespace ProjectManagement
             services.AddTransient<IDeployed, DeploymentRepository>();
             services.AddTransient<IServer, ServerRepository>();
             services.AddTransient<IUnDeployed, UnDeployedRepository>();
+            services.AddTransient<IPersonalInformation, PersonalInformationRepository>();
 
             //added
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));

@@ -965,3 +965,12 @@ H:\Code\Project Management\Project_Management\ProjectManagement\obj\Debug\netcor
 H:\Code\Project Management\Project_Management\ProjectManagement\obj\Debug\netcoreapp3.1\ProjectManagement.dll
 H:\Code\Project Management\Project_Management\ProjectManagement\obj\Debug\netcoreapp3.1\ProjectManagement.pdb
 H:\Code\Project Management\Project_Management\ProjectManagement\obj\Debug\netcoreapp3.1\ProjectManagement.genruntimeconfig.cache
+H:\Code\Project Management\Project_Management\ProjectManagement\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
+H:\Code\Project Management\Project_Management\ProjectManagement\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
+H:\Code\Project Management\Project_Management\ProjectManagement\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+H:\Code\Project Management\Project_Management\ProjectManagement\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+H:\Code\Project Management\Project_Management\ProjectManagement\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
+H:\Code\Project Management\Project_Management\ProjectManagement\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
+H:\Code\Project Management\Project_Management\ProjectManagement\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+H:\Code\Project Management\Project_Management\ProjectManagement\obj\Debug\netcoreapp3.1\Razor\Views\PersonalInformation\Index.cshtml.g.cs
+H:\Code\Project Management\Project_Management\ProjectManagement\obj\Debug\netcoreapp3.1\Razor\Views\PersonalInformation\AddOrEdit.cshtml.g.cs

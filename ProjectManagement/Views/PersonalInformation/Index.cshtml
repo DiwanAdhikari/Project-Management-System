@@ -1,0 +1,114 @@
+﻿@model IEnumerable<ProjectManagement.Models.PersonalInformationViewModel>
+
+@{
+    ViewData["Title"] = "Personal Information ";
+    int i = 1;
+}
+
+<div class="xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="title">
+                        <h4>@ViewData["Title"]</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box mb-30">
+            <div class="pd-20">
+                <p class="mb-0"><a class="btn btn-primary pull-left btn-add" asp-action="AddOrEdit"><i class="fa fa-plus"></i> &nbsp; CREATE</a></p>
+            </div>
+
+            <div class="pb-20" id="search">
+                <table class="data-table table stripe hover nowrap" id="dataTable">
+
+                    <thead>
+                        <tr>
+                            <th>S.N.</th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Reference)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.StateName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DistrictName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PalikaName)
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Reference)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StateName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DistrictName)
+                                </td> 
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PalikaName)
+                                </td>
+
+
+
+                                <td>
+                                  <a asp-controller="PersonalInformation" asp-action="AddOrEdit" asp-route-id="@item.Id">AddOrEdit ||</a>
+                                    @*<a asp-controller="PersonalInformation" asp-action="Details" asp-route-id="@item.Id">Details ||</a>*@
+                                    <a asp-controller="PersonalInformation" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                                </td>
+
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
+
