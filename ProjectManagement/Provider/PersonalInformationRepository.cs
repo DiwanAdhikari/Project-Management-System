@@ -27,7 +27,7 @@ namespace ProjectManagement.Provider
                     data.Id = model.Id;
                     data.Name = model.Name;
                     data.PhoneNumber = model.PhoneNumber;
-                    data.Photo = model.Photo;
+                    data.Photo = model.Photo;                    
                     data.StateId = model.StateId;
                     data.DistrictId = model.DistrictId;
                     data.PalikaId = model.PalikaId;
@@ -36,7 +36,44 @@ namespace ProjectManagement.Provider
                     data.IsActive = true;
                     data.Reference = model.Reference;
                     data.Remarks = model.Remarks;
+                    data.CurrentScope = model.CurrentScope;
+                    data.FutureScope = model.FutureScope;
+
+
+                    _context.Entry(data).State = EntityState.Modified;
+
+                    if (model.PersonalInformationList.Count > 0)
+                    {
+                        foreach (var item in model.PersonalInformationList)
+                        {
+                            var resultSet = _context.Requirement.Where(x => x.RequirementId == item.Id && x.ProjectRequirementId == model.Id).FirstOrDefault();
+
+                            if (resultSet != null)
+                            {
+                                resultSet.ProjectRequirementId = model.Id;
+                                resultSet.Requirements = item.Requirements;
+                                resultSet.Result = item.Result;
+
+                                _context.Entry(resultSet).State = EntityState.Modified;
+                            }
+                            else
+                            {
+                                var data1 = new Requirement()
+                                {
+                                    ProjectRequirementId = model.Id,
+                                    Requirements = item.Requirements,
+                                    Result = item.Result,
+                                };
+                                _context.Requirement.Add(data1);
+                            }
+                        }
+                    }
+
+
+
+
                 }
+
                 else
                 {
                     return 0;
@@ -58,6 +95,8 @@ namespace ProjectManagement.Provider
                     Reference=model.Reference,
                     Remarks=model.Remarks,
                     IsActive = true,
+                    CurrentScope=model.CurrentScope,
+                    FutureScope=model.FutureScope,
 
                 };
                 _context.PersonalInformation.Add(emp);
@@ -94,8 +133,8 @@ namespace ProjectManagement.Provider
                 Reference=x.Reference,
                 Remarks=x.Remarks,
                 IsActive = x.IsActive,
-                
-
+                CurrentScope=x.CurrentScope,
+                FutureScope=x.FutureScope,
             }).FirstOrDefault();
             return personalInformation;
         }
@@ -120,6 +159,8 @@ namespace ProjectManagement.Provider
                 IsActive = x.IsActive,
                 Reference=x.Reference,
                 Remarks=x.Remarks,
+                CurrentScope=x.CurrentScope,
+                FutureScope=x.FutureScope,
             }).Where(x => x.IsActive == true).ToList();
             return result;
         }

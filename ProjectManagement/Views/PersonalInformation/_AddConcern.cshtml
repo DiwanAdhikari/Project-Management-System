@@ -1,0 +1,40 @@
+﻿@model ProjectManagement.Models.ConcernViewModel
+@inject IUtility _Utility
+
+<tr class="newtrans">
+    @using (Html.BeginCollectionItem("ProjectList"))
+    {
+        <td>
+            <div class="col-xl-12 col-md-12 col-12">
+                @*<input asp-for="Id" type="hidden" />
+                    <input asp-for="Id" type="hidden" />*@
+
+                <label asp-for="ConcernPerson" class="conrol-label"></label>
+                <input asp-for="ConcernPerson" , placeholder="who do you got refrence from?" class="form-control"></input>
+                <span asp-validation-for="ConcernPerson" class="text-danger"></span>
+            </div>
+        </td>
+
+        <td>
+            <div class="col-xl-12 col-md-12 col-12">
+                <label asp-for="Phone" class="conrol-label"></label>
+                <input asp-for="Phone" , placeholder="who do you got refrence from?" class="form-control"></input>
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+        </td>
+        <td>
+            <div class="col-xl-12 col-md-12 col-12">               
+                <label asp-for="Post" class="conrol-label"></label>
+                <input asp-for="Post" , placeholder="who do you got refrence from?" class="form-control"></input>
+                <span asp-validation-for="Post" class="text-danger"></span>
+            </div>
+        </td>
+
+        <td>
+            @if (Model.ConcernId == 0)
+            {
+                <button type="button" class="btn btn-danger btn-delete" onclick="DeleteRow(this)"><i class="fa fa-trash">-</i></button>
+            }
+        </td>
+    }
+</tr>

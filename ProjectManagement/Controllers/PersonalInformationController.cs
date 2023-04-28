@@ -19,6 +19,7 @@ namespace ProjectManagement.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.Result = TempData["Result"];
             var result = _personalInformation.GetPersonalInformationList();
             return View(result);
         }
@@ -36,6 +37,11 @@ namespace ProjectManagement.Controllers
             if (ModelState.IsValid)
             {
                 var result = _personalInformation.AddOrEdit(proj);
+                TempData["Result"] = false;
+                if (result > 0)
+                {
+                    TempData["Result"] = true;
+                }
                 return RedirectToAction("Index");
             }
             return View();
@@ -50,5 +56,6 @@ namespace ProjectManagement.Controllers
             var result = _personalInformation.GetPersonalInformationById(id);
             return View(result);
         }
+        public IActionResult AddConcern() => PartialView("_Concern", new PersonalInformationViewModel());
     }
 }

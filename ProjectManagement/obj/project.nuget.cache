@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "4AuB0zy42C5dfy3146X8YZ6o3TabSGlfZfw7fDn5oO9C2u6dPOcOJ1K7GErPHn24A1mM1OVFS17fW0VpRhLCPQ==",
+  "dgSpecHash": "ukCKbqIekkTxE0KQ6h8uVwnD/viXvS7KLqlaP9oZ0BqRcn3dlit0uFDZFHnZYD9gLDlEnBayYm1tyiJDaiurVg==",
   "success": true,
   "projectFilePath": "H:\\Code\\Project Management\\Project_Management\\ProjectManagement\\ProjectManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\begincollectionitemcore\\1.0.9\\begincollectionitemcore.1.0.9.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\fsharp.core\\5.0.1\\fsharp.core.5.0.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\fsharp.data\\5.0.2\\fsharp.data.5.0.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\libuv\\1.10.0\\libuv.1.10.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\mailkit\\3.3.0\\mailkit.3.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.applicationinsights\\2.4.0\\microsoft.applicationinsights.2.4.0.nupkg.sha512",

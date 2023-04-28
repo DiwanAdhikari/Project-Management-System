@@ -56,7 +56,7 @@ namespace ProjectManagement.Models
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
         public List<ProjectRequirementViewModel> List { get; set; }
-        public List<RequirementViewModel> RequirementList { get; set; }
+        public List<RequirementViewModel> PersonalInformationList { get; set; }
 
     }
 

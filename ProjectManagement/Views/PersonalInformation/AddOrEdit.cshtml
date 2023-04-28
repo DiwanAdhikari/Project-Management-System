@@ -2,7 +2,6 @@
 @model ProjectManagement.Models.PersonalInformationViewModel
 @inject IUtility _Utility
 
-
 <div class="xs-pd-20-10">
     <div class="min-height-200px">
         <div class="page-header">
@@ -12,7 +11,7 @@
                         <h4>Add known Clients</h4>
 
                         <div>
-                            <form method="post" id="Myform" Onsubmit="sendForm(event)" asp-action="AddOrEdit">
+                            <form method="post" asp-action="AddOrEdit">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                                 @*<div class="col-xl-3 col-md-4 col-12">*@
@@ -68,31 +67,76 @@
                                     <input asp-for="Reference" , placeholder="who do you got refrence from?" class="form-control"></input>
                                     <span asp-validation-for="Reference" class="text-danger"></span>
                                 </div>
+
+                                <div class="col-xl-4 col-md-4 col-12">
+                                    <label asp-for="CurrentScope" class="conrol-label"></label>
+                                    <input asp-for="CurrentScope" , placeholder="Scope for this Fiscal year" class="form-control"></input>
+                                    <span asp-validation-for="CurrentScope" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-xl-4 col-md-4 col-12">
+                                    <label asp-for="FutureScope" class="conrol-label"></label>
+                                    <input asp-for="FutureScope" , placeholder="Scope for future" class="form-control"></input>
+                                    <span asp-validation-for="FutureScope" class="text-danger"></span>
+                                </div>
+
                                 <div class="col-xl-3 col-md-4 col-12">
                                     <label asp-for="Remarks" class="conrol-label"></label>
                                     <textarea asp-for="Remarks" , placeholder="Add your Remarks" class="form-control"></textarea>
                                     <span asp-validation-for="Remarks" class="text-danger"></span>
                                 </div>
+                                <button type="button" id="btnAddRequire" style=" margin-top: 62px;" class="btn btn-primary pull-right mb-30"><i class="fa fa-plus"></i> Add</button>
+                                <div id="newRequire" style="margin-top:60px;">
+                                    <table style="margin-top: 180px!important;" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Requirement</th>
+                                                <th>Status</th>
+                                            </tr>
+
+
+
+                                        </thead>
+
+                                        <tbody style="padding-top:1rem;" id="transactionbody">
+                                            @if (Model.PersonalInformationViewModel.Count > 0)
+                                            {
+                                                foreach (var item in Model.PersonalInformationViewModel)
+                                                {
+                                                    <partial name="~/Views/PersonalInformation/_AddConcern.cshtml" model="@item" />
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <partial name="~/Views/PersonalInformation/_AddConcern.cshtml" model="@new RequirementViewModel()" />
+                                            }
+                                        </tbody>
+                                        <tfoot>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
 
                                 @*<div class="col-xl-3 col-md-4 col-12">
-                                        <label asp-for="Photo" class="control-label"></label>
-                                        <input type="file" name="file" />
-                                    </div>*@
+                @if (Model.Id == 0)
+                {
+                    <input asp-for="File" accept="image/png, image/jpeg, image/gif" class="form-control" required /> }
+                else
+                {
+                    <input asp-for="File" accept="image/png, image/jpeg, image/gif" class="form-control" />
+                }
+                <input asp-for="Path" type="hidden" />
+                <span asp-validation-for="File" class="text-danger"></span>
+        </div>*@
                                 <div class="row col-md-12">
-                                    <input type="submit" style=" margin-top: 22px; value="Save" class="btn btn-primary pull-right mb-30" />
+                                    <input type="submit" style=" margin-top:22px; value="Save" class="btn btn-primary pull-right mb-30" />
                                 </div>
                             </form>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
-
-
         </div>
-
     </div>
 </div>
 
@@ -104,7 +148,7 @@
 
 @section Scripts {
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 
     <script>
         $('#StateId').change(function () {
@@ -184,18 +228,7 @@
                 return adDate.toLocaleDateString('en-CA');
             }
         }
-        function sendForm(e) {
-            e.preventDefault();
-            Swal.fire(
-                'Good job!',
-                'Data saved Sucessfully',
-                'success',
-               'timer: 3000',
-            );
-
-            const Myform = document.getElementById('Myform'); 
-            Myform.submit();
-        }
+     
 
     </script>
 

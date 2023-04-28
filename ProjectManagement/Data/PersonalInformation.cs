@@ -10,8 +10,10 @@ namespace ProjectManagement.Data
 {
     public class PersonalInformation
     {
+       
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Email { get; set; }
         public string Reference { get; set; }
@@ -29,5 +31,19 @@ namespace ProjectManagement.Data
         [ForeignKey("StateId")]
         public Palika Palika { get; set; }
         public bool IsActive { get; set; }
+        //For future or current goal
+        public string CurrentScope { get; set; }
+        public string FutureScope { get; set; }
+    }
+    public class Concern
+    {
+        [Key]
+        public int ConcernId { get; set; }
+        public string ConcernPerson { get; set; }
+        public string Phone { get; set; }
+        public string Post { get; set; }
+        public int PersonalInformationId { get; set; }
+        [ForeignKey("PersonalInformationId")]
+        public Concern ProjectRequirement { get; set; }
     }
 }

@@ -32,6 +32,7 @@
       "ProjectManagement/1.0.0": {
         "dependencies": {
           "BeginCollectionItemCore": "1.0.9",
+          "FSharp.Data": "5.0.2",
           "MailKit": "3.3.0",
           "Microsoft.AspNet.Mvc": "5.2.9",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "3.1.27",
@@ -321,6 +322,72 @@
         },
         "compile": {
           "lib/netcoreapp2.0/BeginCollectionItemCore.dll": {}
+        }
+      },
+      "FSharp.Core/5.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/FSharp.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.121.10902"
+          }
+        },
+        "resources": {
+          "lib/netstandard2.0/cs/FSharp.Core.resources.dll": {
+            "locale": "cs"
+          },
+          "lib/netstandard2.0/de/FSharp.Core.resources.dll": {
+            "locale": "de"
+          },
+          "lib/netstandard2.0/es/FSharp.Core.resources.dll": {
+            "locale": "es"
+          },
+          "lib/netstandard2.0/fr/FSharp.Core.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/netstandard2.0/it/FSharp.Core.resources.dll": {
+            "locale": "it"
+          },
+          "lib/netstandard2.0/ja/FSharp.Core.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/netstandard2.0/ko/FSharp.Core.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/netstandard2.0/pl/FSharp.Core.resources.dll": {
+            "locale": "pl"
+          },
+          "lib/netstandard2.0/pt-BR/FSharp.Core.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/netstandard2.0/ru/FSharp.Core.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/netstandard2.0/tr/FSharp.Core.resources.dll": {
+            "locale": "tr"
+          },
+          "lib/netstandard2.0/zh-Hans/FSharp.Core.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/netstandard2.0/zh-Hant/FSharp.Core.resources.dll": {
+            "locale": "zh-Hant"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/FSharp.Core.dll": {}
+        }
+      },
+      "FSharp.Data/5.0.2": {
+        "dependencies": {
+          "FSharp.Core": "5.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.Data.dll": {
+            "assemblyVersion": "5.0.2.0",
+            "fileVersion": "5.0.2.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/FSharp.Data.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -5918,6 +5985,20 @@
       "sha512": "sha512-mno7w1SF6yQUoPI8g2rbN3DRqYQAE5xku9XGNsK8OeyGYSqZzs65hwc3bubYxcdF4S8FlvJOEeMP6S5bC58+Vw==",
       "path": "begincollectionitemcore/1.0.9",
       "hashPath": "begincollectionitemcore.1.0.9.nupkg.sha512"
+    },
+    "FSharp.Core/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-96YN8cgEVSpFhENBs+oXmxskFOQIjdW/pGCtyR+X8URYGbbQk0Fpu56uKHTOl7BEj6bSiZCuE8sjr9FdlXjoUQ==",
+      "path": "fsharp.core/5.0.1",
+      "hashPath": "fsharp.core.5.0.1.nupkg.sha512"
+    },
+    "FSharp.Data/5.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eQBiOwlk6p8nVehcrxRK/22BwZXzJ2IkHXuqjIZ9Km0bH90WhBoF7OFdLWenc6dYizQmKv3qKIMCkKfVBepi0A==",
+      "path": "fsharp.data/5.0.2",
+      "hashPath": "fsharp.data.5.0.2.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",

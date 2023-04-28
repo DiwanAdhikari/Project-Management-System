@@ -43,16 +43,16 @@ public class ProjectRequirementRepository : IProjectRequirement
 
                     _context.Entry(data).State = EntityState.Modified;
 
-                    if (model.RequirementList.Count > 0)
+                    if (model.PersonalInformationList.Count > 0)
                     {
-                        foreach(var item in model.RequirementList)
+                        foreach(var item in model.PersonalInformationList)
                         {
-                            var resultSet = _context.Requirement.Where(x => x.RequirementId == item.Id && x.ProjectRequirementId==model.Id).FirstOrDefault();
+                            var resultSet = _context.PersonalInformation.Where(x => x.Id == item.Id && x.Id==model.Id).FirstOrDefault();
 
                             if (resultSet != null)
                             {
-                                resultSet.ProjectRequirementId = model.Id;
-                                resultSet.Requirements = item.Requirements;
+                                resultSet.Id = model.Id;
+                                resultSet.Name = item.ProjectRequirementId;
                                 resultSet.Result = item.Result;
 
                                 _context.Entry(resultSet).State = EntityState.Modified;

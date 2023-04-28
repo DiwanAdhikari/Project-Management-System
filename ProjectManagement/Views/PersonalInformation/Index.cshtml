@@ -30,6 +30,15 @@
                         <tr>
                             <th>S.N.</th>
                             <th>
+                                @Html.DisplayNameFor(model => model.PalikaName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DistrictName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StateName)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
@@ -41,59 +50,49 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Reference)
                             </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.StateName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DistrictName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PalikaName)
-                            </th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
+                        <tr>
+                            <td>
+                                @i
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PalikaName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DistrictName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StateName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Reference)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StateName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DistrictName)
-                                </td> 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PalikaName)
-                                </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Reference)
+                            </td>
 
 
 
-                                <td>
-                                  <a asp-controller="PersonalInformation" asp-action="AddOrEdit" asp-route-id="@item.Id">AddOrEdit ||</a>
-                                    @*<a asp-controller="PersonalInformation" asp-action="Details" asp-route-id="@item.Id">Details ||</a>*@
-                                    <a asp-controller="PersonalInformation" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <td>
+                                <a asp-controller="PersonalInformation" asp-action="AddOrEdit" asp-route-id="@item.Id">AddOrEdit ||</a>
+                                @*<a asp-controller="PersonalInformation" asp-action="Details" asp-route-id="@item.Id">Details ||</a>*@
+                                <a asp-controller="PersonalInformation" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
 
-                                </td>
+                            </td>
 
-                            </tr>
+                        </tr>
                             i++;
                         }
                     </tbody>
@@ -105,10 +104,23 @@
 
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable();
         });
     </script>
+    @if (ViewBag.Result == true)
+    {
+        <script>
+            Swal.fire(
+                'Good job!',
+                'Data saved Sucessfully',
+                'success',
+                'timer: 3000',
+            );
+        </script>
+
+    }
 }
 

@@ -47,6 +47,10 @@
               "target": "Package",
               "version": "[1.0.9, )"
             },
+            "FSharp.Data": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[3.3.0, )"
@@ -104,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.115\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.116\\RuntimeIdentifierGraph.json"
         }
       }
     }
